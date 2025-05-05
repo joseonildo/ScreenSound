@@ -8,6 +8,7 @@ import br.com.joseonildo.screensound.model.TipoArtista;
 import br.com.joseonildo.screensound.repository.ArtistaRepository;
 import br.com.joseonildo.screensound.repository.AlbumRepository;
 import br.com.joseonildo.screensound.repository.MusicaRepository;
+import br.com.joseonildo.screensound.service.ConsultaGemini;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
 import java.util.List;
@@ -270,6 +271,12 @@ public class Principal {
     }
 
     private void pesquisarDadosDoArtista() {
+        if (verificaArtistaExistente(false)) {
+            System.out.println(ConsultaGemini.obterInformacao(artistaSelecionado.getNome()));
+            pausa();
+        } else {
+            System.out.println("Artista não encontrado! Pesquise outro!");
+        }
     }
 
     public boolean verificaArtistaExistente(boolean apenasVerificar) {
@@ -382,9 +389,7 @@ public class Principal {
         System.out.println("Informe o título da música ou pressione ENTER para finalizar");
         System.out.print("Titulo: ");
         nomeMusica = leitura.nextLine();
-        if (nomeMusica.isBlank()) {
-            return;
-        }
+        if (nomeMusica.isBlank()) return;
         Musica novaMusica = new Musica(nomeMusica, nomeArtista, nomeAlbum);
         musicaRepository.save(novaMusica);
         System.out.println(

@@ -58,9 +58,7 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album: " +
-                "nome='" + nome;// + '\'' +
-                //", artista=" + artista +
-                //", musicas=" + musicas;
+        return "Album: " + nome +
+                ", Artista: " + artista.getNome();
     }
 }

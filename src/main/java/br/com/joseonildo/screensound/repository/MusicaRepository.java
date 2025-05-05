@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface MusicaRepository extends JpaRepository<Musica, Long> {
     Optional<Musica> findByNomeContainingIgnoreCase(String nome);
 
-    @Query("SELECT a FROM Musica a WHERE a.artista.nome ILIKE :nomeArtista")
+    @Query("SELECT m FROM Musica m WHERE m.artista.nome ILIKE :nomeArtista")
     List<Musica> buscarMusicasDoArtista(@Param("nomeArtista") String nomeArtista);
 }
